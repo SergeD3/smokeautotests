@@ -6,8 +6,8 @@ from selenium.webdriver.common.by import *
 
 class aplcs:
 
-    def __int__(self):
-        self.wd = webdriver.Chrome
+    def __init__(self):
+        self.wd = webdriver.Chrome('C:/Users/Серж/PycharmProjects/smokeautotests/chromedriver/chromedriver.exe')
         self.wd.implicitly_wait(30)
 
     def open_page(self):
