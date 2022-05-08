@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-import time
 import pytest
-import aplc
+from fixture import aplc
 
 
 @pytest.fixture
@@ -13,8 +12,8 @@ def app(request):
 
 def test_auth_case(app):
     app.open_page()
-    app.login("smoke_auto", "KSAAz%\"6")
-    app.logout()
+    app.session.login("smoke_auto", "KSAAz%\"6")
+    app.session.logout()
 
 
 # def test_auth_empty_case(app):
