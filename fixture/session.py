@@ -15,10 +15,10 @@ class SessionHelper:
         wd.find_element(By.NAME, "password").send_keys(pass_word)
         wd.find_element(By.XPATH, "//button[@type='submit']").click()
         wd.find_element(By.XPATH, "//button[@type='submit']").click()
-        time.sleep(2)
+        time.sleep(1)
 
     def logout(self):
         wd = self.app.wd
-        wd.find_element(By.LINK_TEXT, 'Smoke_autotest robot').click()
-        wd.find_element(By.LINK_TEXT, 'Выйти').click()
-        time.sleep(5)
+        wd.find_element(By.ID, 'project-menu').click()
+        wd.find_element(By.XPATH, '//*[@id="project-menu"]/ul/li[8]/a').click()
+        time.sleep(3)
