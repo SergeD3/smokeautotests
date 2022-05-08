@@ -6,9 +6,9 @@ import aplc
 
 @pytest.fixture
 def app(request):
-    fixture = aplc.aplcs
+    fixture = aplc.Aplcs()
     request.addfinalizer(fixture.destroy)
-    return fixture()
+    return fixture
 
 
 def test_auth_case(app):
@@ -17,6 +17,6 @@ def test_auth_case(app):
     app.logout()
 
 
-def test_auth_empty_case(app):
-    app.open_page()
-    app.login("", "")
+# def test_auth_empty_case(app):
+#     app.open_page()
+#     app.login("", "")

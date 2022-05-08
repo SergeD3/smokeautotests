@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import *
 
 
-class aplcs:
+class Aplcs:
 
     def __init__(self):
         self.wd = webdriver.Chrome('C:/Users/Серж/PycharmProjects/smokeautotests/chromedriver/chromedriver.exe')
@@ -32,4 +32,5 @@ class aplcs:
         time.sleep(5)
 
     def destroy(self):
-        self.wd.quit()
+        wd = self.wd
+        wd.quit()
