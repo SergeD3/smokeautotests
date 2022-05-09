@@ -3,6 +3,7 @@ import time
 from selenium.webdriver.common.by import *
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+import random
 
 
 class UserHelper:
@@ -15,7 +16,6 @@ class UserHelper:
         wd.find_element(By.XPATH, u"//a[contains(text(),'Пользователь')]").click()
         wd.find_element(By.XPATH, "//*[@id=\"project-main-region\"]/div/div[2]/div/div/div[2]/div/div[1]/div["
                                   "2]/div/button[2]").click()
-        time.sleep(5)
 
     def fill_users_form(self, user):
         wd = self.app.wd
@@ -51,3 +51,7 @@ class UserHelper:
         modalbody.find_element(By.XPATH, "//button[@class='btn btn-success  js-ok ']").click()
         time.sleep(10)
 
+        wd.set_window_size(1366, 768)
+        wd.find_element_by_tag_name('body').screenshot(
+            "C:/Users/Серж/Desktop/screenshots_smoke/TestFullPage" + str(random.randint(10, 5000)) + ".png")
+        time.sleep(10)

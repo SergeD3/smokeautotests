@@ -11,11 +11,12 @@ class Aplcs:
     def __init__(self):
         options = webdriver.ChromeOptions()
         options.add_argument("--disable-blink-features=AutomationControlled")
-#        options.add_argument("--headless")
+        options.headless = True
         self.wd = webdriver.Chrome('C:/Users/Серж/PycharmProjects/smokeautotests/chromedriver/chromedriver.exe',
                                    options=options
                                    )
         self.wd.implicitly_wait(10)
+#        self.wd.maximize_window()
         self.session = SessionHelper(self)
         self.users = UserHelper(self)
 
