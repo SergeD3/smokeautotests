@@ -9,8 +9,13 @@ from fixture.users import UserHelper
 class Aplcs:
 
     def __init__(self):
-        self.wd = webdriver.Chrome('C:/Users/Серж/PycharmProjects/smokeautotests/chromedriver/chromedriver.exe')
-        self.wd.implicitly_wait(30)
+        options = webdriver.ChromeOptions()
+        options.add_argument("--disable-blink-features=AutomationControlled")
+#        options.add_argument("--headless")
+        self.wd = webdriver.Chrome('C:/Users/Серж/PycharmProjects/smokeautotests/chromedriver/chromedriver.exe',
+                                   options=options
+                                   )
+        self.wd.implicitly_wait(10)
         self.session = SessionHelper(self)
         self.users = UserHelper(self)
 

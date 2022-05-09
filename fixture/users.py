@@ -1,4 +1,8 @@
+# -*- coding: utf-8 -*-
 import time
+from selenium.webdriver.common.by import *
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class UserHelper:
@@ -6,23 +10,44 @@ class UserHelper:
     def __init__(self, app):
         self.app = app
 
-    def open_create_user(self):
+    def open_create_window(self):
         wd = self.app.wd
-        wd.find_element_by_xpath(u"//a[contains(text(),'Пользователь')]").click()
-        time.sleep(1)
-        wd.find_element_by_xpath("//div[@id='project-main-region']/div/div[2]/div/div/div[2]/div/div/div["
-                                 "2]/div/button[2]/span").click()
-        # wd.find_element_by_id("name-view1021").click()
-        # wd.find_element_by_id("name-view1021").clear()
-        # wd.find_element_by_id("name-view1021").send_keys("some_name")
-        # wd.find_element_by_id("login-view1030").clear()
-        # wd.find_element_by_id("login-view1030").send_keys("some_login")
-        # wd.find_element_by_id("email-view1039").click()
-        # wd.find_element_by_id("email-view1039").clear()
-        # wd.find_element_by_id("email-view1039").send_keys("some_email@email.ru")
-        # wd.find_element_by_id("phone-view1048").click()
-        # wd.find_element_by_id("phone-view1048").clear()
-        # wd.find_element_by_id("phone-view1048").send_keys("777777777777")
-        # wd.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='Отменить'])["
-        #                          u"1]/following::button[1]").click()
-        time.sleep(1)
+        wd.find_element(By.XPATH, u"//a[contains(text(),'Пользователь')]").click()
+        wd.find_element(By.XPATH, "//*[@id=\"project-main-region\"]/div/div[2]/div/div/div[2]/div/div[1]/div["
+                                  "2]/div/button[2]").click()
+        time.sleep(5)
+
+    def fill_users_form(self, user):
+        wd = self.app.wd
+        # ниже пытаюсь получить родительский элемент обёртки и все дочерние div и input
+        WebDriverWait(wd, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='modals-wrapper']")))
+        modalcontainer = wd.find_element(By.XPATH, "//div[@class='modals-wrapper']")
+        modaldialog = modalcontainer.find_element(By.XPATH, ".//div[@class='modal-dialog']")
+        modalcontent = modaldialog.find_element(By.XPATH, "//div[@class='modal-content ui-draggable "
+                                                          "ui-draggable-handle']"
+                                                )
+        modalbody = modalcontent.find_element(By.XPATH, "//div[@class='modal-body ']")
+        # получаем поле Название и прокидываем в него данные из теста
+        input_name = modalbody.find_element(By.XPATH, "//input[@placeholder='Название']")
+        input_name.click()
+        input_name.clear()
+        input_name.send_keys(user.uname)
+        # получаем поле Логин и прокидываем в него данные из теста
+        input_login = modalbody.find_element(By.XPATH, "//input[@placeholder='Логин']")
+        input_login.click()
+        input_login.clear()
+        input_login.send_keys(user.ulogin)
+        # получаем поле Е-мейл и прокидываем в него данные из теста
+        input_email = modalbody.find_element(By.XPATH, "//input[@placeholder='E-мейл']")
+        input_email.click()
+        input_email.clear()
+        input_email.send_keys(user.uemail)
+        # получаем поле Телефон и прокидываем в него данные из теста
+        input_phone = modalbody.find_element(By.XPATH, "//input[@placeholder='Телефон']")
+        input_phone.click()
+        input_phone.clear()
+        input_phone.send_keys(user.uphone)
+
+        modalbody.find_element(By.XPATH, "//button[@class='btn btn-success  js-ok ']").click()
+        time.sleep(10)
+
