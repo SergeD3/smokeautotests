@@ -16,7 +16,6 @@ class Aplcs:
                                    options=options
                                    )
         self.wd.implicitly_wait(10)
-#        self.wd.maximize_window()
         self.session = SessionHelper(self)
         self.users = UserHelper(self)
 

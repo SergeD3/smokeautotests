@@ -12,10 +12,5 @@ def app(request):
 
 def test_auth_case(app):
     app.open_page()
-    app.session.login("smoke_auto", "KSAAz%\"6")
+    app.session.login("smoke_auto", "KSAAz%\"6")  # "smoke_auto", "KSAAz%\"6"
     app.session.logout()
-
-
-# def test_auth_empty_case(app):
-#     app.open_page()
-#     app.login("", "")
