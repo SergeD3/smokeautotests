@@ -4,6 +4,13 @@ from selenium.webdriver.common.by import *
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 import random
+from pathlib import Path
+from datetime import datetime
+
+
+date = datetime.today().strftime('%m-%d-%y %H-%M-%S')
+filename = 'TestFullPage_' + date + ".png"
+path = Path(Path.home(), 'Desktop', 'screenshots_smoke', filename)
 
 
 class UserHelper:
@@ -47,11 +54,10 @@ class UserHelper:
         input_phone.click()
         input_phone.clear()
         input_phone.send_keys(user.uphone)
-
+        # жмакаем на Создать
         modalbody.find_element(By.XPATH, "//button[@class='btn btn-success  js-ok ']").click()
         time.sleep(10)
 
         wd.set_window_size(1366, 768)
-        wd.find_element_by_tag_name('body').screenshot(
-            "C:/Users/Серж/Desktop/screenshots_smoke/TestFullPage" + str(random.randint(10, 5000)) + ".png")
+        wd.find_element_by_tag_name('body').screenshot(str(path))
         time.sleep(10)

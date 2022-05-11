@@ -2,6 +2,9 @@
 import pytest
 from fixture import aplc
 
+_username = "smoke_auto"
+_password = "KSAAz%\"6"
+
 
 @pytest.fixture
 def app(request):
@@ -12,5 +15,5 @@ def app(request):
 
 def test_auth_case(app):
     app.open_page()
-    app.session.login("smoke_auto", "KSAAz%\"6")  # "smoke_auto", "KSAAz%\"6"
+    app.session.login(_username, _password)  # "smoke_auto", "KSAAz%\"6"
     app.session.logout()

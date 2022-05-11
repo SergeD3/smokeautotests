@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import time
 from selenium import webdriver
-from selenium.webdriver.common.by import *
 from fixture.session import SessionHelper
 from fixture.users import UserHelper
+from pathlib import Path
+
+path = Path(Path.home(), 'PycharmProjects', 'smokeautotests', 'chromedriver', 'chromedriver.exe')
 
 
 class Aplcs:
@@ -12,9 +14,7 @@ class Aplcs:
         options = webdriver.ChromeOptions()
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.headless = True
-        self.wd = webdriver.Chrome('C:/Users/Серж/PycharmProjects/smokeautotests/chromedriver/chromedriver.exe',
-                                   options=options
-                                   )
+        self.wd = webdriver.Chrome(path, options=options)
         self.wd.implicitly_wait(10)
         self.session = SessionHelper(self)
         self.users = UserHelper(self)

@@ -2,6 +2,11 @@ import sys
 import time
 from selenium.webdriver.common.by import *
 from datetime import datetime
+from pathlib import Path
+
+date = datetime.today().strftime('%m-%d-%y %H-%M-%S')
+filename = 'TestFullPage_' + date + ".png"
+path = Path(Path.home(), 'Desktop', 'screenshots_smoke', filename)
 
 
 class SessionHelper:
@@ -12,7 +17,6 @@ class SessionHelper:
     def login(self, user_name, pass_word):
         wd = self.app.wd
         wd.set_window_size(1366, 768)
-        date = datetime.today().strftime('%m-%d-%y %H-%M-%S')
         full_body = wd.find_element(By.TAG_NAME, "body")
         wd.find_element(By.NAME, "login").clear()
         wd.find_element(By.NAME, "login").send_keys(user_name)
@@ -28,11 +32,10 @@ class SessionHelper:
                 and wd.current_url == 'http://192.168.124.56/#project/', 'we have some problem with auth'
         except Exception as ex:
             print('Problem: ' + '\n', ex)
-            wd.find_element(By.TAG_NAME, 'body').screenshot(
-                "C:/Users/Серж/Desktop/screenshots_smoke/test_auth" + '_' + date + ".png")
+            wd.find_element(By.TAG_NAME, 'body').screenshot(str(path))
             sys.exit()
         else:
-            wd.find_element(By.TAG_NAME, 'body').screenshot("C:/Users/Серж/Desktop/screenshots_smoke/test_auth" + '_' + date + ".png")
+            wd.find_element(By.TAG_NAME, 'body').screenshot(str(path))
             time.sleep(2)
 
     def logout(self):
