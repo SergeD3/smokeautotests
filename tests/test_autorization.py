@@ -2,7 +2,7 @@
 import pytest
 from fixture import aplc
 
-_username = "smoke_auto"
+_username = "s2moke_auto"
 _password = "KSAAz%\"6"
 
 
