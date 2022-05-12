@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import time
 from selenium.webdriver.common.by import *
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait as ww
@@ -55,6 +54,7 @@ class UserHelper:
             input_phone.send_keys(user.uphone)
             # жмакаем на Создать
             modalbody.find_element(By.XPATH, "//button[@class='btn btn-success  js-ok ']").click()
+            ww(wd, 10).until(ec.element_to_be_clickable((By.XPATH, "//input[@id='name']")))
         except Exception as ex:
             print(ex)
         finally:
